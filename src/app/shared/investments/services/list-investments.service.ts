@@ -1,19 +1,31 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
+
+// interface
 import { Investments } from '../model/investments';
 
 @Injectable({
   providedIn: 'root'
 })
+
 export class ListInvestmentsService {
 
   private url:string = 'https://raw.githubusercontent.com/troquatte/fake-server/main/investiments-all.json'
 
-  constructor( private http: HttpClient) { }
+  constructor(private http: HttpClient) { }
 
-  public list():Observable<Investments>{
-    return this.http.get<Investments>(this.url).pipe(map(res => res))
+  public list(): Observable<Array<Investments>>{
+    return this.http.get<Array<Investments>>(this.url, this.jsonHeader())
+    .pipe(map(res => res))
   }
+
+  public jsonHeader() {
+    // create authorization header with jwt token
+    return {
+        headers: new HttpHeaders()
+            .set('content-type', 'application/json')
+    };
+}
 }

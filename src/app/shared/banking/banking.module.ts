@@ -10,7 +10,7 @@ import { HttpClientTestingModule } from '@angular/common/http/testing';
 @NgModule({
   declarations: [
     BankingComponent,
-    ListComponent,
+    ListComponent
   ],
   imports: [
     CommonModule,
@@ -19,6 +19,7 @@ import { HttpClientTestingModule } from '@angular/common/http/testing';
   ],
   exports: [
     BankingComponent,
+    ListComponent
   ]
 })
 export class BankingModule { }
